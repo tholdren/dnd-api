@@ -1,14 +1,28 @@
 ---
 // Import Stylesheet
+// Import Stylesheet
 import '../styles/global.css';
 
 // data source
-// replace temporary JSON placeholder API
-const source = 'https://jsonplaceholder.typicode.com/users';
-// fetch the data
-const res = await fetch(source); 
-// store retreived data
-const data = await res.json();
+const baseUrl = 'https://www.dnd5eapi.co';
+
+let detailedData = [];
+try {
+  // Fetch the list of races
+  const res = await fetch(`${baseUrl}/api/races`);
+  const listData = await res.json();
+
+  // Fetch detailed data for each race
+  detailedData = await Promise.all(
+    listData.results.map(async (race) => {
+      const detailRes = await fetch(`${baseUrl}${race.url}`);
+      const detail = await detailRes.json();
+      return detail;
+    })
+  );
+} catch (error) {
+  console.error('Error fetching data:', error);
+}
 ---
 
 <html lang="en">
@@ -26,31 +40,28 @@ const data = await res.json();
 	<body>
 		
 		<header class="masthead">
-			<h1 class="site-title">Gallery</h1>
+			<h1 class="site-title">DnD Races</h1>
 		</header>
 
 		<main id="content" class="main-area">
 
 			<ul class="cards">
-		  
-				<!-- Your API Data -->
 				{
-					data.map( item =>
+				  detailedData.map(race => (
 					<li class="card-item">
-						<a href="#">
-							<figure class="card">
-							<img src="https://assets.codepen.io/16425/image-placeholder.png" alt="Placeholder">
-							<figcaption class="caption">
-								<h3 class="caption-title">{item.name}</h3>
-								<p>{item.company.catchPhrase}</p>
-							</figcaption>
-							</figure>
-						</a>
-					</li> 
-					)
+					  <figure class="card">
+						<img src="https://assets.codepen.io/16425/image-placeholder.png" alt={`Image for ${race.name}`} />
+						<figcaption class="caption">
+						  <h3 class="caption-title">{race.name}</h3>
+						  <p><strong>Speed:</strong> {race.speed}</p>
+						  <p><strong>Alignment:</strong> {race.alignment}</p>
+						  <p><strong>Age:</strong> {race.age}</p>
+						</figcaption>
+					  </figure>
+					</li>
+				  ))
 				}
-		  
-			</ul>
+			  </ul>
 		  </main>
 		  
 
