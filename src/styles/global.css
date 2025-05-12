@@ -24,7 +24,7 @@
 
 /* Body */
 body {
-  background-image: url('assets/AdobeStock_1335349098.jpeg');
+  background-image: url(../assets/AdobeStock_1335349098.jpeg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
