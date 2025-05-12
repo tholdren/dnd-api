@@ -2,92 +2,158 @@
 
 /* Header */
 .masthead {
-    text-align: center;
-    border-bottom: 1px solid hsl(0, 0%, 90%);
+  background-color: hsla(118, 80%, 16%, 0.39);
+  color: white;
+  padding: 2em;
+  margin-bottom: 1.5em;
+  text-align: center;
+  line-height: 0%;
+}
+.masthead h1 {
+  font-size: 3em;
+  font-family: 'Sentient', serif;
 }
 
-/* Header */
+.masthead p {
+      font-family: 'Panchang', sans-serif;
+      font-size: .9em;
+      
+}
+
+
+
+/* Body */
+body {
+  background-image: url('assets/AdobeStock_1335349098.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
+
+/* Image Reset */
 img {
-    display: block;
-    border: 0;
-    width: 100%;
-    height: auto;
-  }
-    
+  display: block;
+  border: 0;
+  width: 100%;
+  height: auto;
+}
+
+/* Card Container */
 .cards {
-margin: 0;
-padding: 0;
-list-style-type: none;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
 
+/* Typography */
+.descriptors {
+  font-family: 'Panchang', sans-serif;
+}
+
+/* Card Wrapper */
 .cards a {
-display: block;
-margin-bottom: 1em;
-text-decoration: none;
+  display: block;
+  margin-bottom: 1em;
+  text-decoration: none;
 }
 
+/* Individual Card */
+.card {
+  display: grid;
+  position: relative;
+  border: 2px solid white; /* Stroke outline */
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: all 0.4s ease-in-out;
+}
+
+/* Before Hover: Default Title Display */
+.card::before {
+  content: attr(data-name);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-family: 'Panchang', sans-serif;
+  color: white;
+  text-shadow: 1px 1px 5px black;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  z-index: 2;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Hide Default View on Hover */
+a:focus .card::before,
+a:hover .card::before {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Caption Container (hidden initially) */
 .caption {
-padding: 1em;
-background: hsla(246, 40%, 30%, 0.6);
-color: white;
-font-size: 1.2em;
-transition: all 0.4s;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  grid-column: 1;
+  grid-row: 1;
+  padding: 1em;
+  background: hsla(246, 40%, 30%, 0.6);
+  color: white;
+  border-radius: 12px;
+  transition: opacity 0.4s ease-in-out;
 }
 
+/* Reveal Caption on Hover */
 a:focus .caption,
 a:hover .caption {
-background: hsla(246, 40%, 30%, 1);
+  background: hsla(140, 55%, 15%, 0.6);
+  opacity: 1;
 }
 
+/* Caption Title */
 .caption-title {
-margin: 0;
-font-size: 1.4em;
-line-height: 1.1em;
+  margin: 0;
+  font-size: 1.4em;
+  line-height: 1.1em;
+  text-align: center;
+  font-family: 'Panchang', sans-serif;
 }
 
-/*--------------------------------------------------------------
-CSS Grid layout for wider screens, when browser supports grid:
---------------------------------------------------------------*/
+/* Responsive Grid: Small Screens */
 @media screen and (min-width: 30em) {
-.cards {
+  .cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1em;
-}
+  }
 
-.cards a {
+  .cards a {
     margin-bottom: 0;
-}
+  }
 
-.card {
-    display: grid;
-}
-
-.card img,
-.caption {
+  .card img,
+  .caption {
     grid-column: 1;
     grid-row: 1;
+  }
 }
 
-.caption {
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-
-    /* Alignment */
-    /*     align-items: flex-end; */
-    /*     justify-content: flex-end; */
-}
-
-a:focus .caption,
-a:hover .caption {
-    background: hsla(246, 40%, 30%, 0.6);
-    opacity: 1;
-}
-}
-
+/* Responsive Grid: Large Screens */
 @media screen and (min-width: 60em) {
-.cards {
+  .cards {
     grid-template-columns: repeat(3, 1fr);
-}
+  }
 }

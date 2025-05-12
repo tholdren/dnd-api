@@ -2,7 +2,6 @@
 // Import Stylesheet
 // Import Stylesheet
 import '../styles/global.css';
-
 // data source
 const baseUrl = 'https://www.dnd5eapi.co';
 
@@ -20,6 +19,7 @@ try {
       return detail;
     })
   );
+
 } catch (error) {
   console.error('Error fetching data:', error);
 }
@@ -34,13 +34,16 @@ try {
 
 		<!-- Normalize CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+		<link href="https://api.fontshare.com/v2/css?f[]=panchang@200,700&display=swap" rel="stylesheet">
+		<link href="https://api.fontshare.com/v2/css?f[]=sentient@500&display=swap" rel="stylesheet">
 
 		<title>Retreive and and display external API data with Astro</title>
 	</head>
 	<body>
-		
+
 		<header class="masthead">
 			<h1 class="site-title">DnD Races</h1>
+			<p><strong>Designed by:</strong> Tristan Holdren </p>
 		</header>
 
 		<main id="content" class="main-area">
@@ -50,13 +53,21 @@ try {
 				  detailedData.map(race => (
 					<li class="card-item">
 					<a href="#">
-					  <figure class="card">
-						<img src="https://assets.codepen.io/16425/image-placeholder.png" alt={`Image for ${race.name}`} />
+					  <figure class="card" data-name={race.name}>
+
 						<figcaption class="caption">
-						  <h3 class="caption-title">{race.name}</h3>
-						  <p><strong>Speed:</strong> {race.speed}</p>
-						  <p><strong>Alignment:</strong> {race.alignment}</p>
-						  <p><strong>Age:</strong> {race.age}</p>
+						  <h3 class="caption-title" style=" 
+						  text-align: center;
+						  font-size: 1.5rem;
+						  font-family: 'Panchang', sans-serif;
+						  ">{race.name}</h3>
+						  <p id="type" style="text-align: center; font-size: .75rem; font-family: 'Panchang', sans-serif;">
+							<strong>Type:</strong> {race.type || 'DnD Race'}
+						  </p>
+						  <p class="descriptors"><strong>Speed:</strong> {race.speed}</p>
+						  <p class="descriptors"><strong>Alignment:</strong> {race.alignment}</p>
+						  <p class="descriptors"><strong>Age:</strong> {race.age}</p>
+						  <p class="descriptors"><strong>Size:</strong> {race.size}</p>
 						</figcaption>
 					  </figure>
 					  </a>
