@@ -52,6 +52,13 @@ img {
   font-family: 'Panchang', sans-serif;
 }
 
+.size-descriptor {
+  font-family: 'Panchang', sans-serif;
+  font-size: .7em;
+  margin-bottom: 1em;
+    margin-top: -1em;
+}
+
 /* Card Wrapper */
 .cards a {
   display: block;
